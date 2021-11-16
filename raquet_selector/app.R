@@ -12,6 +12,7 @@ library(ggplot2)
 library(plotly)
 
 raquetas <- readRDS("raquetas.rds")
+coldisp <- colnames(raquetas)[!(colnames(raquetas) %in% c("Name","marca","imagen","current","Composition"))]
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -23,10 +24,10 @@ ui <- fluidPage(
     sidebarLayout(
         sidebarPanel(width = 2,
             h4("Plot"),
-            selectInput(inputId = "xaxis",label = "X Axis",choices = colnames(raquetas),selected = "StrungWeight",multiple = FALSE),
-            selectInput(inputId = "yaxis",label = "Y Axis",choices = colnames(raquetas),selected = "HeadSize",multiple = FALSE),
-            selectInput(inputId = "facet",label = "Facet",choices = c("ninguna",colnames(raquetas)),selected = "PowerLevel",multiple = FALSE),
-            selectInput(inputId = "color",label = "Color",choices = colnames(raquetas),selected = "Stiffness",multiple = FALSE),
+            selectInput(inputId = "xaxis",label = "X Axis",choices = coldisp,selected = "StrungWeight",multiple = FALSE),
+            selectInput(inputId = "yaxis",label = "Y Axis",choices = coldisp,selected = "HeadSize",multiple = FALSE),
+            selectInput(inputId = "facet",label = "Facet",choices = c("ninguna",coldisp),selected = "PowerLevel",multiple = FALSE),
+            selectInput(inputId = "color",label = "Color",choices = coldisp,selected = "Stiffness",multiple = FALSE),
             checkboxInput(inputId = "current",label = "Show only current",value = FALSE),
             h4("Highlight racquet"),
             selectInput(inputId = "marca",label = "Manufacturer",choices = c("ninguna",unique(raquetas$Marca)),selected = "ninguna"),
