@@ -46,7 +46,7 @@ server <- function(input, output) {
     
     output$modelo <- renderUI({
         modelos <- raquetas[raquetas$Marca==input$marca,]$Name
-        selectInput(inputId = "modelo",label = "Model",choices = modelos)
+        selectizeInput(inputId = "modelo",label = "Model",choices = modelos)
     })
 
     output$distPlot <- renderPlotly({
@@ -60,7 +60,11 @@ server <- function(input, output) {
         raquetas_graf <- raquetas_graf %>% dplyr::filter(Stiffness>30)
         grafico1 <- ggplot() + geom_point(data = raquetas_graf,aes_string(x=input$xaxis,y=input$yaxis,color=input$color,text="Name"))
         if(input$facet!="ninguna"){
-         grafico1 <- grafico1 + facet_wrap(as.formula(paste("~", input$facet)),nrow = 1)
+            if(input$facet=="PowerLevel"){
+                grafico1 <- grafico1 + facet_wrap(as.formula(paste("~", input$facet)),nrow = 1)
+            } else {
+                grafico1 <- grafico1 + facet_wrap(as.formula(paste("~", input$facet)))
+            }
         }
         if(is.numeric(raquetas[[input$color]])){
             grafico1 <- grafico1 + scale_color_gradient(low = "green",high = "red")
