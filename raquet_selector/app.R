@@ -11,7 +11,7 @@ library(shiny)
 library(ggplot2)
 library(plotly)
 
-raquetas <- readRDS("../raquetas.rds")
+raquetas <- readRDS("raquetas.rds")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(

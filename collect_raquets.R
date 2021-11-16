@@ -74,4 +74,5 @@ collect_all_raquets <- function(){
   raquetas[raquetas$Marca=="2013/Tecnifibre",]$Marca <- "Tecnifibre"
   raquetas[raquetas$Marca=="WIlson",]$Marca <- "Wilson"
   saveRDS(raquetas,file="raquetas.rds")
+  saveRDS(raquetas,file="raquet_selector/raquetas.rds")
 }
