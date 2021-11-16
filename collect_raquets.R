@@ -68,5 +68,10 @@ collect_all_raquets <- function(){
   fabricantes <- get_fabricantes()
   raquetas <- fabricantes %>% map(rvest_raquetas)
   raquetas <- discard(raquetas, function(z) nrow(z) == 0) %>% bind_rows()
+  raquetas[raquetas$Marca=="adidas",]$Marca <- "Adidas"
+  raquetas[raquetas$Marca=="HEAD",]$Marca <- "Head"
+  raquetas[raquetas$Marca=="2012/ProKennex",]$Marca <- "ProKennex"
+  raquetas[raquetas$Marca=="2013/Tecnifibre",]$Marca <- "Tecnifibre"
+  raquetas[raquetas$Marca=="WIlson",]$Marca <- "Wilson"
   saveRDS(raquetas,file="raquetas.rds")
 }
