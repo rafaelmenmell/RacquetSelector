@@ -78,6 +78,7 @@ collect_all_raquets <- function(){
 }
 
 get_similar_raquet <- function(dfraquetas,marca,modelo,curr,uHS=20,uL=1,uSW=6,uS=2){
+  raquetas <- readRDS("raquetas.rds")
   raqueta <- raquetas %>% dplyr::filter(Marca==marca,Name==modelo)
   raqueta <- raqueta[1,]
   minHS <- raqueta$HeadSize - uHS

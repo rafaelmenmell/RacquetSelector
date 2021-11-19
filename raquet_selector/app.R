@@ -49,7 +49,7 @@ server <- function(input, output, session) {
     output$modelo <- renderUI({
         modelos <- sort(raquetas[raquetas$Marca==input$marca,]$Name)
         # selectizeInput(inputId = "modelo",label = "Model",choices = modelos)
-        selectInput(inputId = "modelo",label = "Model",choices = modelos)
+        selectInput(inputId = "modelo",label = "Model",choices = modelos,selected = modelos[1])
     })
     
     observe({
