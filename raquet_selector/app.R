@@ -70,7 +70,7 @@ server <- function(input, output) {
             grafico1 <- grafico1 + scale_color_gradient(low = "green",high = "red")
         }
         if(input$modelo!=""){
-        grafico1 <- grafico1 + geom_point(data=raquetas[raquetas$Name==input$modelo,],aes(x=StrungWeight,y=HeadSize),color="blue",shape=3)
+          grafico1 <- grafico1 + geom_point(data=raquetas[raquetas$Name==input$modelo,],aes_string(x=input$xaxis,y=input$yaxis),color="blue",shape=3)
         }
         grafico1 <- grafico1 + theme_light()
         ggplotly(grafico1)
