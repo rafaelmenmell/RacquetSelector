@@ -82,7 +82,7 @@ server <- function(input, output, session) {
         if(input$marca!="ninguna"){
           if(input$similares){
             raquetas_similares <- get_similar_raquet(dfraquetas = raquetas_graf,marca = input$marca,modelo = input$modelo,curr = input$current)
-            grafico1 <- grafico1 + geom_point(data = raquetas_similares,aes_string(x=input$xaxis,y=input$yaxis,color=input$color,text="Name"),alpha=1)
+            grafico1 <- grafico1 + geom_point(data = raquetas_similares,aes_string(x=input$xaxis,y=input$yaxis,text="Name"),color="yellow",alpha=1)
           }
           if(input$modelo!=""){
             grafico1 <- grafico1 + geom_point(data=raquetas[raquetas$Name==input$modelo,],aes_string(x=input$xaxis,y=input$yaxis),color="blue",shape=3)
