@@ -76,3 +76,18 @@ collect_all_raquets <- function(){
   saveRDS(raquetas,file="raquetas.rds")
   saveRDS(raquetas,file="raquet_selector/raquetas.rds")
 }
+
+get_similar_raquet <- function(dfraquetas,marca,modelo,curr,uHS=20,uL=1,uSW=6,uS=2){
+  raqueta <- raquetas %>% dplyr::filter(Marca==marca,Name==modelo)
+  minHS <- raqueta$HeadSize - uHS
+  maxHS <- raqueta$HeadSize + uHS
+  minL <- raqueta$Length - uL
+  maxL <- raqueta$Length + uL
+  minSW <- raqueta$SwingWeight - uL
+  maxSW <- raqueta$SwingWeight + uL
+  minS <- raqueta$Stiffness - uS
+  maxS <- raqueta$Stiffness + uS
+  raquetas_similares <- dfraquetas %>% dplyr::filter(HeadSize>=minHS,HeadSize<=maxHS) %>% dplyr::filter(Length>=minL,Length<=maxL) %>% dplyr::filter(SwingWeight>=minSW,SwingWeight<=maxSW) %>% dplyr::filter(Stiffness>=minS,Stiffness<=maxS) %>% dplyr::filter(current==curr)
+  raquetas_similares <- raquetas_similares[raquetas_similares$Name!=modelo,]
+  return(raquetas_similares)
+}
